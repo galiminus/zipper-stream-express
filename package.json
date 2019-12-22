@@ -14,5 +14,8 @@
     "express": "^4.17.1",
     "request": "^2.88.0",
     "uuid": "^3.3.3"
+  },
+  "scripts": {
+    "start": "node index.js"
   }
 }
