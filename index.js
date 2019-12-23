@@ -5,21 +5,26 @@ const Request = require('request');
 const Path = require('path');
 const Url = require('url');
 const Express = require('express');
+const FormidableMiddleware = require('express-formidable');
 
 const app = Express();
+app.use(FormidableMiddleware());
 
-app.get('/zip', function (req, res) {
+function respondWithArchive(res, urls) {
   const archive = Archiver('zip');
   archive.store = true;
   archive.pipe(res);
   res.setHeader('Content-disposition', `attachment; filename=${Uuid()}.zip`);
   res.setHeader('Content-type', 'application/zip');
 
-  Async.eachSeries(req.query.urls.split(','), (url, next) => {
+  Async.eachSeries(urls, (url, next) => {
     request = Request.get(url);
     request.on('end', next)
     archive.append(request, { name: Path.basename(Url.parse(url).pathname) });
   }, () => archive.finalize())
-})
+}
+
+app.get('/zip', (req, res) => respondWithArchive(res, req.query.urls.split(',')));
+app.post('/zip', (req, res) => respondWithArchive(res, req.fields.urls.split(',')));
 
 app.listen(process.env.PORT || 3000);
