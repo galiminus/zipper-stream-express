@@ -12,5 +12,5 @@ Well, the code is currently 25 lines long in total so you can check it out, but 
 GET /zip?urls=[comma],[separated],[list],[of],[urls]
 ```
 
-And that's it, the download should start immediately.
+And that's it, the download should start immediately. You can also use a POST request for longer url list.
 
