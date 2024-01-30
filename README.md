@@ -4,7 +4,7 @@ Simple Express App to zip URLs on the fly and return a single zip archive. It's 
 
 ## How does it work?
 
-Well, the code is currently 25 lines long in total so you can check it out, but nothing fancy, the app just pipes things around. It should use much memory (whatever the size of the input is) and doesn't use any temporary storage.
+Well, the code is currently 25 lines long in total so you can check it out, but nothing fancy, the app just pipes things around. It shouldn't use much memory (the size of the input doesn't matter much) and doesn't use any temporary storage.
 
 ## API
 
